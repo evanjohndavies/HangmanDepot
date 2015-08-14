@@ -7,6 +7,7 @@ public class HangmanModel {
 		System.out.println("hello world");
 		System.out.println("again");
 		System.out.println("and again");
+		System.out.println("still");
 			
 
 	}
