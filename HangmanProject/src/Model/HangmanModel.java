@@ -30,6 +30,28 @@ public class HangmanModel {
 		
 	}
 	
+	
+	
+	public Character getValidInput(String str){
+		
+		Character testChar;
+		
+		if(str != null  && str.length()>0){
+			testChar = str.charAt(0);
+			
+			if(Character.isAlphabetic(testChar)){
+				testChar = Character.toUpperCase(testChar);
+				return(testChar);
+			};
+		}
+		
+		return(null);
+		
+		
+	}
+	
+	
+	
 	private void resetGuessCount(){
 		this.guessCount = 0;
 		

@@ -31,11 +31,51 @@ public class HangmanController extends ConsoleProgram{
 	}
 	
 	
+	private Character getValidCharGuess(){
+		
+		boolean cont = true;
+		Character inputChar;
+		
+		while(cont){
+			
+			inputChar = hangmanModel.getValidInput(
+					consoleView.getInputString("Enter a Character, hit return", this));
+				
+			if(inputChar != null){
+				consoleView.printMsg("valid entry from " + consoleView.getLastInput() + " " + inputChar, this);
+				return(inputChar);
+			}
+			consoleView.printMsg(("Invalid Entry " + consoleView.getLastInput()), this);
+		
+		}
+		// not needed as should never get here but eclipse complained
+		return (null);
+	}
+	
+	private void playTurn(){
+		
+		Character inputChar;
+		
+		inputChar= getValidCharGuess();
+		
+	}
 	
 	public void run() {
 		
+		boolean continueGame = true;
+		
+		
 		System.out.println("hello world");
 		initializeGame();	
+		
+		
+
+		while (continueGame){
+			
+			playTurn();
+			
+			
+		}
 		
 		System.out.println("goodbye world");
 
