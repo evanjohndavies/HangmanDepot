@@ -1,9 +1,12 @@
 package Model;
 
+import java.util.*;
+
 public class SecretWord {
 	
 	public SecretWord(){
 		secretWord = null;
+		displayWord = null;
 	}
 	
 	public boolean setSecretWord(String inputWord){
@@ -12,6 +15,7 @@ public class SecretWord {
 		if (this.validWord(this.secretWord)){
 			if (this.validWord(inputWord)){
 				secretWord = inputWord;
+				displayWord = inputWord.replaceAll("[A-Z]", "-");
 				return (true);
 				}
 			}
@@ -47,10 +51,30 @@ public class SecretWord {
 	public boolean containsLetter(Character inputLetter){
 		
 		if (secretWord.contains(inputLetter.toString())){
+			displayWord = replaceTokenWithLetter(secretWord, displayWord, inputLetter);
 			return(true);
-		}
+		}	
 		return (false);
 	}
+	
+	
+	public String getDisplayWord(){
+		
+		return(displayWord);
+	}
+	
+	private String replaceTokenWithLetter(String inputStr, String displayStr, Character letter){
+		
+		char[] newDisplayCharArray = displayStr.toCharArray(); 
+		
+		for (int i=0; i< inputStr.length() ;i++){
+				if(letter.equals(secretWord.charAt(i))){
+					newDisplayCharArray[i] = letter;
+				}
+		}
+		return(String.valueOf(newDisplayCharArray));
+	}
+	
 	
 	private String cleanInput (String inputString){
 		
@@ -61,6 +85,7 @@ public class SecretWord {
 	
 	
 	private String secretWord;
+	private String displayWord;
 	
 	
 }

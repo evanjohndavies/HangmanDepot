@@ -17,7 +17,7 @@ public class HangmanModel {
 		
 	}
 	
-	public void resetWordToGuess(){
+	public void resetGame(){
 		
 		wordToGuess.setSecretWord(wordList.getSecretWord());
 		resetGuessCount();
@@ -29,7 +29,6 @@ public class HangmanModel {
 		return(this.wordToGuess.getSecretWord());
 		
 	}
-	
 	
 	
 	public Character getValidInput(String str){
@@ -47,34 +46,36 @@ public class HangmanModel {
 		
 		return(null);
 		
-		
 	}
 	
-	
-	
-	private void resetGuessCount(){
-		this.guessCount = 0;
-		
-	}
-	
-	public boolean wordContainsLetter (Character letter){
-		
 
-		// add the letter guessed to the guessed letter string 
-		lettersEntered.add(letter);
-		
+	
+	public void processGuessEntry (Character letter){
+				
 		// if letter is in word update display string
-		if(wordToGuess.containsLetter(letter))
-		{
-			return(true);
+		if(!wordToGuess.containsLetter(letter)){
+			// add the letter guessed to the guessed letter string if not already there
+			if (!lettersEntered.contains(letter)){
+				lettersEntered.add(letter);
+				guessCount++;
+				}
 		}
-		guessCount++;
-		return (false);
 	}
 	
-	public boolean wonGame(String testWord){
+	
+	public ArrayList<Character> getLettersEntered(){
+		return(lettersEntered);
+	}
+	
+	public String getDisplayWord(){
 		
-		if (wordToGuess.compareToSecretWord(testWord)){
+		return(wordToGuess.getDisplayWord());
+	}
+	
+	
+	public boolean wonGame(){
+		
+		if (wordToGuess.compareToSecretWord(wordToGuess.getDisplayWord())){
 		setEndGame(true);
 		return(true);
 		}
@@ -91,6 +92,10 @@ public class HangmanModel {
 	}
 	
 	
+	public int getGuessCount(){
+		return(guessCount);
+	}
+	
 	public boolean getContinueGame (){
 		
 		return(!continueGameCondition);
@@ -100,7 +105,11 @@ public class HangmanModel {
 		continueGameCondition = cond;
 	}
 	
-	
+		
+	private void resetGuessCount(){
+		this.guessCount = 0;
+		
+	}
 	private Lexicon wordList = new Lexicon();
 	private SecretWord wordToGuess = new SecretWord();
 	public ArrayList <Character> lettersEntered = new ArrayList<Character>();

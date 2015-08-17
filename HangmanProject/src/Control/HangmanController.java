@@ -24,9 +24,7 @@ public class HangmanController extends ConsoleProgram{
 			consoleView.printMsg("invalid file", this);
 		}
 		
-		hangmanModel.resetWordToGuess();
-		
-		consoleView.printMsg(hangmanModel.getWordToGuess(), this);
+		hangmanModel.resetGame();
 
 	}
 	
@@ -52,28 +50,38 @@ public class HangmanController extends ConsoleProgram{
 		return (null);
 	}
 	
+	
 	private void playTurn(){
+				
+		hangmanModel.processGuessEntry(getValidCharGuess());
 		
-		Character inputChar;
-		
-		inputChar= getValidCharGuess();
+	}
+	
+	private void updateDisplayStatus(){
+		consoleView.printMsg("Guess Count " + hangmanModel.getGuessCount(),  this);
+		consoleView.printMsg("Display Word " + hangmanModel.getDisplayWord(),  this);
+		consoleView.printMsg("Letters Guessed " + hangmanModel.getLettersEntered(),  this);
+		if (hangmanModel.wonGame()){
+			consoleView.printMsg("Won Game " + hangmanModel.getDisplayWord(),  this);
+		}
+		if (hangmanModel.lostGame()){
+				consoleView.printMsg("Lost Game " + hangmanModel.getDisplayWord(),  this);
+		}
+
 		
 	}
 	
 	public void run() {
-		
-		boolean continueGame = true;
-		
 		
 		System.out.println("hello world");
 		initializeGame();	
 		
 		
 
-		while (continueGame){
-			
+		while (hangmanModel.getContinueGame()){
+	
 			playTurn();
-			
+			updateDisplayStatus();
 			
 		}
 		
@@ -87,7 +95,6 @@ public class HangmanController extends ConsoleProgram{
 	private ConsoleView consoleView = new ConsoleView();
 	private HangmanModel hangmanModel = new HangmanModel();
 	private SecretWord secretWord = new SecretWord();;
-	private String str;
 	
 
 }
