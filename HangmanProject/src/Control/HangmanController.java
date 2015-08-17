@@ -16,14 +16,13 @@ public class HangmanController extends ConsoleProgram{
 	
 	private void initializeGame(){
 		
-		while (true){
-			if(hangmanModel.setUpLexicon(
-					consoleView.getInputString("Enter Lexicon File Name", this))){
-			break;
-			}
-			consoleView.printMsg("invalid file", this);
-		}
+
 		
+		while (!hangmanModel.openLexicon(
+					consoleView.getInputString("Enter Lexicon File Name", this))){
+						consoleView.printMsg("invalid file", this);
+			}
+		System.out.println("before game reset");
 		hangmanModel.resetGame();
 
 	}

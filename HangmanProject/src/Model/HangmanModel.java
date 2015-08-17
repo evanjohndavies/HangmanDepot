@@ -10,16 +10,28 @@ public class HangmanModel {
 	}
 	
 	
-	public boolean setUpLexicon(String fileName){
+	public boolean openLexicon(String fileName){
 		
 		// return(wordList.initializeLexiconFile(fileName));
-		return(true);
+		
+		if (wordList.checkFileExists(fileName))
+		{
+			System.out.println("before open  buffer");
+			wordList.openBufferedReader(fileName);
+			
+			System.out.println("after openBufferReader");
+			wordList.readLexiconList();
+			return(true);
+		}
+		
+		return(false);
+			
 		
 	}
 	
 	public void resetGame(){
 		
-		wordToGuess.setSecretWord(wordList.getSecretWord());
+		wordToGuess.setSecretWord(wordList.getRandomWord());
 		resetGuessCount();
 		setEndGame(false);
 		
