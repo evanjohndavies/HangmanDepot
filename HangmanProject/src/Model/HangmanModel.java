@@ -17,10 +17,7 @@ public class HangmanModel {
 		if (wordList.checkFileExists(fileName))
 		{
 			System.out.println("before open  buffer");
-			wordList.openBufferedReader(fileName);
-			
-			System.out.println("after openBufferReader");
-			wordList.readLexiconList();
+			wordList.openAndReadBufferedReader(fileName);
 			return(true);
 		}
 		

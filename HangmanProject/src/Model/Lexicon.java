@@ -24,31 +24,25 @@ public class Lexicon {
 	}
 	
 	
-	public void openBufferedReader(String fileName){
+	public void openAndReadBufferedReader(String fileName){
 		
-		File f = new File(fileName);
+		String line = null;
 		
-		
-		
+		System.out.println("open and read buffer");
 		try {
 			
-			
-			if (f.exists() && !f.isDirectory()){
-				System.out.println("file exists again " + f.getName());
-				
-			}
-				
-			
-			
-			System.out.println("before open file reader" + fileName);
 			fileReader = new FileReader(fileName);
-			
-			System.out.println("before open buffer reader" + fileName);
-
 			bufferReader = new BufferedReader(fileReader);
 			
-			
-			System.out.println("after open buffer reader");
+			while((line = bufferReader.readLine()) != null) {
+	            System.out.println(line);
+				line = line.trim();
+				line = line.toUpperCase();
+				lexiconList.add(line);
+				System.out.println(line);
+			}
+			bufferReader.close();
+
 		} 
 		catch (FileNotFoundException ex){
 			System.out.println("can't open file: " +fileName);
@@ -59,37 +53,10 @@ public class Lexicon {
 			System.out.println("error reading file: " + fileName);
 			e.printStackTrace();
 			
-		} finally{
-			try{
-				if (bufferReader!=null) bufferReader.close();
-			} catch (IOException ex){
-				ex.printStackTrace();
-			}
-		}
+		} 
 		
 	}
 	
-	public void readLexiconList(){
-		
-		String line = null;
-		
-		try{
-			System.out.println("before reading inputs from lex");
-			while((line = bufferReader.readLine()) != null){
-				System.out.println("in reading lex file");
-				line = line.trim();
-				line = line.toUpperCase();
-				lexiconList.add(line);
-				System.out.println(line);
-			}
-			
-			bufferReader.close();
-		}
-		catch (IOException ex){
-			System.out.println("can read buffer");
-		}
-		
-	}
 	
 	
 	public String getRandomWord (){
@@ -103,10 +70,10 @@ public class Lexicon {
 	
 	   
 	   
-	private	Random randomObject;
+	private	Random randomObject = new Random();
 	private BufferedReader bufferReader = null;
 	private FileReader fileReader = null;
-	private ArrayList<String> lexiconList;
+	private ArrayList<String> lexiconList = new ArrayList<String>();
 	
 
 	
