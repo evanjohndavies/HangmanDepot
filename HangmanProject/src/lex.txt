@@ -2,3 +2,6 @@ apple
 pear
 bannana
 string
+  tree
+bar-code
+  Stop&Go

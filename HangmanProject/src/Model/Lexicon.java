@@ -26,22 +26,19 @@ public class Lexicon {
 	
 	public void openAndReadBufferedReader(String fileName){
 		
-		String line = null;
-		
-		System.out.println("open and read buffer");
+		String line = null;		
 		try {
 			
 			fileReader = new FileReader(fileName);
 			bufferReader = new BufferedReader(fileReader);
 			
 			while((line = bufferReader.readLine()) != null) {
-	            System.out.println(line);
 				line = line.trim();
 				line = line.toUpperCase();
 				lexiconList.add(line);
 				System.out.println(line);
 			}
-			bufferReader.close();
+
 
 		} 
 		catch (FileNotFoundException ex){
@@ -53,7 +50,17 @@ public class Lexicon {
 			System.out.println("error reading file: " + fileName);
 			e.printStackTrace();
 			
-		} 
+		}
+		finally {
+			try {
+				if (bufferReader != null){
+					bufferReader.close();
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+			
+		}
 		
 	}
 	

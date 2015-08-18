@@ -15,7 +15,7 @@ public class SecretWord {
 		if (this.validWord(this.secretWord)){
 			if (this.validWord(inputWord)){
 				secretWord = inputWord;
-				displayWord = inputWord.replaceAll("[A-Z]", "-");
+				displayWord = inputWord.replaceAll("[A-Z]", "_");
 				return (true);
 				}
 			}

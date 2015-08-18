@@ -22,7 +22,6 @@ public class HangmanController extends ConsoleProgram{
 					consoleView.getInputString("Enter Lexicon File Name", this))){
 						consoleView.printMsg("invalid file", this);
 			}
-		System.out.println("before game reset");
 		hangmanModel.resetGame();
 
 	}
@@ -50,10 +49,8 @@ public class HangmanController extends ConsoleProgram{
 	}
 	
 	
-	private void playTurn(){
-				
+	private void playTurn(){	
 		hangmanModel.processGuessEntry(getValidCharGuess());
-		
 	}
 	
 	private void updateDisplayStatus(){
@@ -66,8 +63,28 @@ public class HangmanController extends ConsoleProgram{
 		if (hangmanModel.lostGame()){
 				consoleView.printMsg("Lost Game " + hangmanModel.getDisplayWord(),  this);
 		}
-
+	}
+	
+	private boolean playAgain(){
 		
+		String str;
+		Character c;
+		
+		while(true){
+			str = consoleView.getInputString("Would you like to play again? Enter [Y/N]" , this);
+			str = str.trim();
+			str = str.toUpperCase();
+			c = str.charAt(0);
+			if (c == 'Y'){
+				hangmanModel.setExitGameCondition(false);
+				return(true);
+			}
+			if (c =='N'){
+				hangmanModel.setExitGameCondition(true);
+				return(false);
+			}
+			consoleView.printMsg("Invalid Entry", this);
+		}
 	}
 	
 	public void run() {
@@ -76,19 +93,21 @@ public class HangmanController extends ConsoleProgram{
 		initializeGame();	
 		
 		
-
-		while (hangmanModel.getContinueGame()){
-	
-			playTurn();
-			updateDisplayStatus();
+		while (!hangmanModel.getExitGameCondition()){
 			
-		}
+			while (hangmanModel.getContinueGame()){
+				playTurn();
+				updateDisplayStatus();
+			}
+			
+			if(!playAgain()) break;
+			
+			hangmanModel.resetGame();
 		
+		}
 		System.out.println("goodbye world");
 
 	}
-	
-	
 	
 	
 	private ConsoleView consoleView = new ConsoleView();

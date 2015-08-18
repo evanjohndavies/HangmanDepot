@@ -16,13 +16,11 @@ public class HangmanModel {
 		
 		if (wordList.checkFileExists(fileName))
 		{
-			System.out.println("before open  buffer");
 			wordList.openAndReadBufferedReader(fileName);
 			return(true);
 		}
 		
 		return(false);
-			
 		
 	}
 	
@@ -31,6 +29,7 @@ public class HangmanModel {
 		wordToGuess.setSecretWord(wordList.getRandomWord());
 		resetGuessCount();
 		setEndGame(false);
+		lettersEntered.removeAll(lettersEntered);
 		
 	}
 	
@@ -110,6 +109,14 @@ public class HangmanModel {
 		return(!continueGameCondition);
 	}
 	
+	public boolean getExitGameCondition(){
+		return(exitGame);
+	}
+	
+	public void setExitGameCondition(boolean val){
+		exitGame = val;
+	}
+	
 	private void setEndGame(boolean cond ){
 		continueGameCondition = cond;
 	}
@@ -125,6 +132,7 @@ public class HangmanModel {
 	private int guessCount;
 	private static int maxMisses = 8;
 	private boolean continueGameCondition; 
+	private boolean exitGame = false;
 
 
 }
