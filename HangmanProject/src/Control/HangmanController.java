@@ -1,8 +1,11 @@
 package Control;
 
+
+
 import Model.HangmanModel;
 import Model.SecretWord;
 import View.ConsoleView;
+import View.HangmanCanvas;
 import acm.program.*;
 
 
@@ -11,6 +14,15 @@ public class HangmanController extends ConsoleProgram{
 	
 	
 	public HangmanController(){
+		
+	}
+	
+	public void init(){
+			
+		
+		canvas = new HangmanCanvas ();
+		canvas.setSize(1400,1500);
+		add(canvas);
 		
 	}
 	
@@ -111,6 +123,7 @@ public class HangmanController extends ConsoleProgram{
 	
 	
 	private ConsoleView consoleView = new ConsoleView();
+	private HangmanCanvas canvas;
 	private HangmanModel hangmanModel = new HangmanModel();
 	private SecretWord secretWord = new SecretWord();;
 	
