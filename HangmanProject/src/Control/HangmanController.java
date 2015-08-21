@@ -21,7 +21,6 @@ public class HangmanController extends ConsoleProgram{
 			
 		
 		canvas = new HangmanCanvas ();
-		canvas.setSize(1400,1500);
 		add(canvas);
 		
 	}
@@ -35,6 +34,14 @@ public class HangmanController extends ConsoleProgram{
 						consoleView.printMsg("invalid file", this);
 			}
 		hangmanModel.resetGame();
+		
+		/* It is not necessary to pass canvas to itself.  I am doing this so that
+		 * I can practice catching the object being updated and then refering to it in the 
+		 * class and method that updates the object.  Rather another way is to 
+		 * have the object update itself by self reference of this. 
+		 */
+		canvas.buildScaffold(canvas);
+		
 
 	}
 	
@@ -125,7 +132,7 @@ public class HangmanController extends ConsoleProgram{
 	private ConsoleView consoleView = new ConsoleView();
 	private HangmanCanvas canvas;
 	private HangmanModel hangmanModel = new HangmanModel();
-	private SecretWord secretWord = new SecretWord();;
+	private SecretWord secretWord = new SecretWord();;	
 	
 
 }
