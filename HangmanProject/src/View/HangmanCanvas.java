@@ -56,8 +56,7 @@ import acm.graphics.*;
 		scaffold.add(pole,offset,0);
 		scaffold.add(rope,offset+BEAM_LENGTH,0);
 		scaffold.add(base,0,SCAFFOLD_HEIGHT);
-		
-		
+				
 		canvasWidth=canvas.getWidth();
 		canvasHeight = canvas.getHeight();
 		scaffoldHeight = SCAFFOLD_HEIGHT + BASE_HEIGHT;
@@ -69,10 +68,12 @@ import acm.graphics.*;
 		canvas.add(scaffold,xOffset,yOffset);
 		
 		buildMan();
-		
+		/* Calculate offset to Scaffold and add object. Each element
+		*  of the hangman will not be visible. will set visbile with each 
+		*	wrong guess
+		*/
 		xOffset += (BASE_WIDTH/3+ (BEAM_LENGTH - UPPER_ARM_LENGTH));
 		yOffset = ((canvasHeight/2) - (scaffoldHeight/2) + ROPE_LENGTH);
-		
 		this.add(hangmanDisplay,xOffset,yOffset);
 		
 		
@@ -85,8 +86,7 @@ import acm.graphics.*;
 		leftArm.add( new GLine(0,0,0,LOWER_ARM_LENGTH));
 		
 		rightArm.add(new GLine(0,0,UPPER_ARM_LENGTH,0));
-		rightArm.add( new GLine(UPPER_ARM_LENGTH,0,UPPER_ARM_LENGTH,LOWER_ARM_LENGTH));
-		
+		rightArm.add( new GLine(UPPER_ARM_LENGTH,0,UPPER_ARM_LENGTH,LOWER_ARM_LENGTH));		
 	}
 	
 	
@@ -97,8 +97,6 @@ import acm.graphics.*;
 		
 		rightLeg.add(new GLine(0,0,(.5 * HIP_WIDTH),0));
 		rightLeg.add(new GLine((.5 * HIP_WIDTH),0,(.5 * HIP_WIDTH),LEG_LENGTH));
-		
-
 	}
 	
 	
@@ -109,16 +107,6 @@ import acm.graphics.*;
 		int xOffset = 0;
 		drawArms();
 		drawLegs();
-		
-		head.setVisible(true);
-		body.setVisible(true);
-		leftArm.setVisible(true);
-		rightArm.setVisible(true);
-		leftLeg.setVisible(true);
-		rightLeg.setVisible(true);
-		leftFoot.setVisible(true);
-		rightFoot.setVisible(true);
-		
 		
 		/*
 		 * As noted above, using the 'this.' form instead of passing the reference
@@ -163,7 +151,6 @@ import acm.graphics.*;
 		xOffset = (int) (UPPER_ARM_LENGTH + (.5 * HIP_WIDTH));
 		hangmanDisplay.add(rightFoot, xOffset, yOffset);
 				
-		
 	}
 	
 	
