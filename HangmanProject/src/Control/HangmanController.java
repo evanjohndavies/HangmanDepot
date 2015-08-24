@@ -42,8 +42,8 @@ public class HangmanController extends ConsoleProgram{
 		 */
 		canvas.buildUIComponenents(canvas);
 		canvas.reset();
+		canvas.displayUpdate(hangmanModel.getDisplayWord(), hangmanModel.getLettersEntered());
 		
-
 	}
 	
 	
@@ -80,6 +80,7 @@ public class HangmanController extends ConsoleProgram{
 		consoleView.printMsg("Guess Count " + hangmanModel.getGuessCount(),  this);
 		consoleView.printMsg("Display Word " + hangmanModel.getDisplayWord(),  this);
 		consoleView.printMsg("Letters Guessed " + hangmanModel.getLettersEntered(),  this);
+		canvas.displayUpdate(hangmanModel.getDisplayWord(), hangmanModel.getLettersEntered());
 		if (hangmanModel.wonGame()){
 			consoleView.printMsg("Won Game " + hangmanModel.getDisplayWord(),  this);
 		}
@@ -100,6 +101,7 @@ public class HangmanController extends ConsoleProgram{
 			c = str.charAt(0);
 			if (c == 'Y'){
 				hangmanModel.setExitGameCondition(false);
+				canvas.reset();
 				return(true);
 			}
 			if (c =='N'){
@@ -126,6 +128,7 @@ public class HangmanController extends ConsoleProgram{
 			if(!playAgain()) break;
 			
 			hangmanModel.resetGame();
+			updateDisplayStatus();
 		
 		}
 		System.out.println("goodbye world");

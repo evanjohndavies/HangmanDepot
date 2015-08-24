@@ -25,10 +25,6 @@ import acm.graphics.*;
 		}
 
 		hangmanArrayIndex = 0;
-		
-		
-		
-		
    }
 	
 	
@@ -38,7 +34,7 @@ import acm.graphics.*;
 		    * user. Calling this method causes the next body part to appear
 		    * on the scaffold and adds the letter to the list of incorrect
 		    * guesses that appears at the bottom of the window. */
-		   public void noteIncorrectGuess(char letter) { 
+	public void noteIncorrectGuess(char letter) { 
 			   	  	  
 			  hangmanArray.get(hangmanArrayIndex++).setVisible(true);
 			
@@ -48,7 +44,9 @@ import acm.graphics.*;
 		 * Updates the word on the screen to correspond to the current
 		 * state of the game. The argument string shows what letters have
 		 * been guessed so far; unguessed letters are indicated by hyphens. */
-	   public void displayWord(String word) {
+	public void displayUpdate(String word, ArrayList<Character> letters) {
+		   displayWord.setLabel(word);
+		   displayLetters.setLabel(letters.toString());
 		
 	   }
 	   
@@ -96,7 +94,7 @@ import acm.graphics.*;
 		
 		this.add(scaffold,xOffset,yOffset);
 		
-		
+		// build and add hangman components 
 		buildMan();
 		/* Calculate offset to Scaffold and add object. Each element
 		*  of the hangman will not be visible. will set visible with each 
@@ -106,6 +104,18 @@ import acm.graphics.*;
 		yOffset = ((canvasHeight/2) - (scaffoldHeight/2) + ROPE_LENGTH);
 		
 		canvas.add(hangmanDisplay,xOffset,yOffset);
+		
+		
+		// Add Display Fields for Word and Letters Guessed
+		displayWord.setVisible(true);
+		displayLetters.setVisible(true);
+		
+		canvas.add(displayWord, 100, 200);
+		canvas.add(displayLetters, 200, 100);
+		
+		
+		
+		
 		
 	}
 	
@@ -224,6 +234,8 @@ private GCompound leftLeg = new GCompound();
 private GLine leftFoot = new GLine(0,0,FOOT_LENGTH,0);
 private GCompound rightLeg = new GCompound();
 private GLine rightFoot = new GLine(0,0,FOOT_LENGTH,0);
+private GLabel displayWord = new GLabel("Bite me");
+private GLabel  displayLetters = new GLabel("Bite me too");
 
 
 }
