@@ -69,7 +69,10 @@ public class HangmanController extends ConsoleProgram{
 	
 	
 	private void playTurn(){	
-		hangmanModel.processGuessEntry(getValidCharGuess());
+		if(!hangmanModel.processGuessEntry(getValidCharGuess())){
+			canvas.noteIncorrectGuess('a');
+		}
+			
 	}
 	
 	private void updateDisplayStatus(){
@@ -132,7 +135,7 @@ public class HangmanController extends ConsoleProgram{
 	private ConsoleView consoleView = new ConsoleView();
 	private HangmanCanvas canvas;
 	private HangmanModel hangmanModel = new HangmanModel();
-	private SecretWord secretWord = new SecretWord();;	
+	private SecretWord secretWord = new SecretWord();	
 	
 
 }

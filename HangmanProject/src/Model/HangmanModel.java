@@ -58,7 +58,7 @@ public class HangmanModel {
 	
 
 	
-	public void processGuessEntry (Character letter){
+	public boolean processGuessEntry (Character letter){
 				
 		// if letter is in word update display string
 		if(!wordToGuess.containsLetter(letter)){
@@ -66,8 +66,10 @@ public class HangmanModel {
 			if (!lettersEntered.contains(letter)){
 				lettersEntered.add(letter);
 				guessCount++;
+				return(false);
 				}
 		}
+		return(true);
 	}
 	
 	

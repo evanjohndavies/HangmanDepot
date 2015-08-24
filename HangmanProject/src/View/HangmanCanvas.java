@@ -3,6 +3,8 @@ package View;
 
 import java.util.ArrayList;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 /*
  * File: HangmanCanvas.java
  * ------------------------
@@ -150,6 +152,8 @@ import acm.graphics.*;
 		
 		xOffset = (int) (UPPER_ARM_LENGTH + (.5 * HIP_WIDTH));
 		hangmanDisplay.add(rightFoot, xOffset, yOffset);
+		
+		hangmanDisplay.setVisible(false);
 				
 	}
 	
@@ -161,9 +165,7 @@ import acm.graphics.*;
 	 * state of the game. The argument string shows what letters have
 	 * been guessed so far; unguessed letters are indicated by hyphens. */
    public void displayWord(String word) {
-      /* You fill this in */
-	   
-	   
+	
    }
    
    
@@ -175,6 +177,12 @@ import acm.graphics.*;
     * on the scaffold and adds the letter to the list of incorrect
     * guesses that appears at the bottom of the window. */
    public void noteIncorrectGuess(char letter) { 
+	   
+	   GObject object;
+	  
+	   object= hangmanArray.get(iterator);
+	   object.setVisible(true);
+	   
 	
 
 	}
@@ -197,6 +205,7 @@ private static final int LEG_LENGTH = 108;
 private static final int FOOT_LENGTH = 28;
 
 private ArrayList<GObject> hangmanArray = new ArrayList<GObject>();
+private int iterator = 0;
 private GCompound hangmanDisplay = new GCompound();
 
 
