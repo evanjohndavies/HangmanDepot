@@ -1,9 +1,9 @@
 package View;
 
 
-import java.util.ArrayList;
+import java.util.*;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
+
 
 /*
  * File: HangmanCanvas.java
@@ -18,10 +18,43 @@ import acm.graphics.*;
 
 		
 	public void reset() {
-      /* You fill this in */
+
+		
+		for (Iterator<GObject> i =  hangmanArray.iterator(); i.hasNext();){
+			i.next().setVisible(false);
+		}
+
+		hangmanArrayIndex = 0;
+		
+		
+		
+		
    }
 	
-	/*This method builds the scaffold for the game.  passed to the method is the 
+	
+	
+	/**
+		    * Updates the display to correspond to an incorrect guess by the
+		    * user. Calling this method causes the next body part to appear
+		    * on the scaffold and adds the letter to the list of incorrect
+		    * guesses that appears at the bottom of the window. */
+		   public void noteIncorrectGuess(char letter) { 
+			   	  	  
+			  hangmanArray.get(hangmanArrayIndex++).setVisible(true);
+			
+			}
+
+	/**
+		 * Updates the word on the screen to correspond to the current
+		 * state of the game. The argument string shows what letters have
+		 * been guessed so far; unguessed letters are indicated by hyphens. */
+	   public void displayWord(String word) {
+		
+	   }
+	   
+	   
+	   
+	 /* This method builds the scaffold and hangman pieces for the game.  passed to the method is the 
 	 * object itself from the calling class that defined it.  In this context
 	 * I don't need to do this and could refer to it with the 'this.' nomenclature
 	 * Thought here was to prep this for having potentially multiple canvases to 
@@ -29,14 +62,8 @@ import acm.graphics.*;
 	 * on the final implementation.  For building the acual hangman I use the this.
 	 * just as another way to do the reference.
 	 */
-	
-	public void buildScaffold(HangmanCanvas canvas){
+	public void buildUIComponenents(HangmanCanvas canvas){
 		
-		GCompound scaffold = new GCompound();
-		GLine pole = new GLine(0, 0, 0, SCAFFOLD_HEIGHT);
-		GLine beam = new GLine(0,0,BEAM_LENGTH, 0);
-		GLine rope = new GLine(0,0,0,ROPE_LENGTH);
-		GRect base = new GRect(BASE_WIDTH, BASE_HEIGHT);
 		int offset = BASE_WIDTH/3;
 		int canvasHeight;
 		int canvasWidth;
@@ -59,7 +86,7 @@ import acm.graphics.*;
 		scaffold.add(rope,offset+BEAM_LENGTH,0);
 		scaffold.add(base,0,SCAFFOLD_HEIGHT);
 				
-		canvasWidth=canvas.getWidth();
+		canvasWidth= canvas.getWidth();
 		canvasHeight = canvas.getHeight();
 		scaffoldHeight = SCAFFOLD_HEIGHT + BASE_HEIGHT;
 		scaffoldWidth = BASE_WIDTH;
@@ -67,17 +94,18 @@ import acm.graphics.*;
 		xOffset = ((canvasWidth/2) - (scaffoldWidth/2));
 		yOffset = ((canvasHeight/2) - (scaffoldHeight/2));
 		
-		canvas.add(scaffold,xOffset,yOffset);
+		this.add(scaffold,xOffset,yOffset);
+		
 		
 		buildMan();
 		/* Calculate offset to Scaffold and add object. Each element
-		*  of the hangman will not be visible. will set visbile with each 
+		*  of the hangman will not be visible. will set visible with each 
 		*	wrong guess
 		*/
 		xOffset += (BASE_WIDTH/3+ (BEAM_LENGTH - UPPER_ARM_LENGTH));
 		yOffset = ((canvasHeight/2) - (scaffoldHeight/2) + ROPE_LENGTH);
-		this.add(hangmanDisplay,xOffset,yOffset);
 		
+		canvas.add(hangmanDisplay,xOffset,yOffset);
 		
 	}
 	
@@ -116,15 +144,6 @@ import acm.graphics.*;
 		 * approach
 		 */
 		
-		hangmanArray.add(head);
-		hangmanArray.add(body);		
-		hangmanArray.add(leftArm);
-		hangmanArray.add(rightArm);
-		hangmanArray.add(leftLeg);
-		hangmanArray.add(rightLeg);
-		hangmanArray.add(leftFoot);
-		hangmanArray.add(rightFoot);
-		
 		xOffset = UPPER_ARM_LENGTH - HEAD_RADIUS;
 		hangmanDisplay.add(head,xOffset, 0);
 		
@@ -151,45 +170,29 @@ import acm.graphics.*;
 		hangmanDisplay.add(leftFoot, xOffset, yOffset);
 		
 		xOffset = (int) (UPPER_ARM_LENGTH + (.5 * HIP_WIDTH));
-		hangmanDisplay.add(rightFoot, xOffset, yOffset);
+		hangmanDisplay.add(rightFoot, xOffset, yOffset);		
 		
-		hangmanDisplay.setVisible(false);
+		hangmanArray.add(head);
+		hangmanArray.add(body);		
+		hangmanArray.add(leftArm);
+		hangmanArray.add(rightArm);
+		hangmanArray.add(leftLeg);
+		hangmanArray.add(rightLeg);
+		hangmanArray.add(leftFoot);
+		hangmanArray.add(rightFoot);
+		
+		hangmanDisplay.setVisible(true);
+		
+		for (Iterator<GObject> i =  hangmanArray.iterator(); i.hasNext();){
+			i.next().setVisible(false);
+		}
 				
 	}
 	
 	
 	
 	
-	/**
-	 * Updates the word on the screen to correspond to the current
-	 * state of the game. The argument string shows what letters have
-	 * been guessed so far; unguessed letters are indicated by hyphens. */
-   public void displayWord(String word) {
-	
-   }
-   
-   
-   
-   
-   /**
-    * Updates the display to correspond to an incorrect guess by the
-    * user. Calling this method causes the next body part to appear
-    * on the scaffold and adds the letter to the list of incorrect
-    * guesses that appears at the bottom of the window. */
-   public void noteIncorrectGuess(char letter) { 
-	   
-	   GObject object;
-	  
-	   object= hangmanArray.get(iterator);
-	   object.setVisible(true);
-	   
-	
-
-	}
-   
-   
-   
-// Constants for the simple version of the picture (in pixels)
+	// Constants for the simple version of the picture (in pixels)
 private static final int SCAFFOLD_HEIGHT = 360; 
 private static final int BASE_WIDTH = 250;
 private static final int BASE_HEIGHT = 50;
@@ -205,10 +208,14 @@ private static final int LEG_LENGTH = 108;
 private static final int FOOT_LENGTH = 28;
 
 private ArrayList<GObject> hangmanArray = new ArrayList<GObject>();
-private int iterator = 0;
+private int hangmanArrayIndex = 0;
 private GCompound hangmanDisplay = new GCompound();
 
-
+private GCompound scaffold = new GCompound();
+private GLine pole = new GLine(0, 0, 0, SCAFFOLD_HEIGHT);
+private GLine beam = new GLine(0,0,BEAM_LENGTH, 0);
+private GLine rope = new GLine(0,0,0,ROPE_LENGTH);
+private GRect base = new GRect(BASE_WIDTH, BASE_HEIGHT);
 private GOval head = new GOval((2*HEAD_RADIUS), (2*HEAD_RADIUS));
 private GLine body = new GLine(0,0,0,BODY_LENGTH);
 private GCompound leftArm = new GCompound();
@@ -217,9 +224,6 @@ private GCompound leftLeg = new GCompound();
 private GLine leftFoot = new GLine(0,0,FOOT_LENGTH,0);
 private GCompound rightLeg = new GCompound();
 private GLine rightFoot = new GLine(0,0,FOOT_LENGTH,0);
-
-
-
 
 
 }

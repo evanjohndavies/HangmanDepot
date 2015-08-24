@@ -40,7 +40,8 @@ public class HangmanController extends ConsoleProgram{
 		 * class and method that updates the object.  Rather another way is to 
 		 * have the object update itself by self reference of this. 
 		 */
-		canvas.buildScaffold(canvas);
+		canvas.buildUIComponenents(canvas);
+		canvas.reset();
 		
 
 	}
