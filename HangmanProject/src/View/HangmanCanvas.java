@@ -1,6 +1,7 @@
 package View;
 
 
+import java.awt.Font;
 import java.util.*;
 
 
@@ -76,7 +77,8 @@ import acm.graphics.*;
 		rope.setVisible(true);;
 		pole.setVisible(true);
 		base.setVisible(true);
-		
+		displayWord.setVisible(true);
+		displayLetters.setVisible(true);	
 		// calculate layout of scaffold in GCompound
 		
 		scaffold.add(beam,offset,0);
@@ -89,10 +91,33 @@ import acm.graphics.*;
 		scaffoldHeight = SCAFFOLD_HEIGHT + BASE_HEIGHT;
 		scaffoldWidth = BASE_WIDTH;
 			
-		xOffset = ((canvasWidth/2) - (scaffoldWidth/2));
-		yOffset = ((canvasHeight/2) - (scaffoldHeight/2));
+		xOffset = (canvasWidth - scaffoldWidth)/2;
+		System.out.println("X = " + xOffset);
+		
+		yOffset = (canvasHeight - scaffoldHeight)/2;
+		System.out.println("Y = " + yOffset);
+
 		
 		this.add(scaffold,xOffset,yOffset);
+		
+		// Add Display Fields for Word and Letters Guessed
+		
+		System.out.println("X = " + xOffset);
+		System.out.println("SCAFFOLD_HEIGHT = " + SCAFFOLD_HEIGHT);
+		System.out.println("BASE_HEIGHT = " + BASE_HEIGHT);
+		System.out.println("BASE_WIDTH = " + BASE_WIDTH);
+		System.out.println("canvasWidth = " + canvasWidth);
+		System.out.println("canvasHeight = " + canvasHeight);
+		System.out.println("scaffold.getHeight() = " + scaffold.getHeight());
+		System.out.println("scaffold.getWidth() = " + scaffold.getWidth());
+		System.out.println("scaffold.getX = " + scaffold.getX());
+		System.out.println("scaffold.getY = " + scaffold.getY());
+		System.out.println("scaffoldWidth = " + scaffoldWidth);
+		System.out.println("scaffoldHeight = " + scaffoldHeight);
+		System.out.println("displayLetters.getHeight() = " + displayLetters.getHeight());
+		System.out.println("displayLetters.getWidth() = " + displayLetters.getWidth());
+		
+	
 		
 		// build and add hangman components 
 		buildMan();
@@ -106,12 +131,24 @@ import acm.graphics.*;
 		canvas.add(hangmanDisplay,xOffset,yOffset);
 		
 		
-		// Add Display Fields for Word and Letters Guessed
-		displayWord.setVisible(true);
-		displayLetters.setVisible(true);
+		displayWord.setFont(new Font("Courier New", Font.BOLD, 18));
+		xOffset = scaffold.getX() + CHAR_INDENT;
+		yOffset = scaffold.getY() + SCAFFOLD_HEIGHT + (BASE_HEIGHT/2) + displayWord.getHeight()/2;
 		
-		canvas.add(displayWord, 100, 200);
-		canvas.add(displayLetters, 200, 100);
+		System.out.println("Y = " + yOffset);
+		
+		canvas.add(displayWord, xOffset, yOffset);
+		
+		yOffset += BASE_HEIGHT;
+		canvas.add(displayLetters, xOffset, yOffset);	
+		
+		
+
+		
+		
+		
+
+
 		
 		
 		
@@ -205,7 +242,7 @@ import acm.graphics.*;
 	// Constants for the simple version of the picture (in pixels)
 private static final int SCAFFOLD_HEIGHT = 360; 
 private static final int BASE_WIDTH = 250;
-private static final int BASE_HEIGHT = 50;
+private static final int BASE_HEIGHT = 45;
 private static final int BEAM_LENGTH = 144; 
 private static final int ROPE_LENGTH = 18; 
 private static final int HEAD_RADIUS = 36; 
@@ -216,6 +253,7 @@ private static final int LOWER_ARM_LENGTH = 44;
 private static final int HIP_WIDTH = 36; 
 private static final int LEG_LENGTH = 108; 
 private static final int FOOT_LENGTH = 28;
+private static final int CHAR_INDENT = 20;
 
 private ArrayList<GObject> hangmanArray = new ArrayList<GObject>();
 private int hangmanArrayIndex = 0;
