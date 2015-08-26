@@ -19,15 +19,12 @@ public class HangmanController extends ConsoleProgram{
 	
 	public void init(){
 			
-		
+		// adding display for hangman
 		canvas = new HangmanCanvas ();
 		add(canvas);
-		
 	}
 	
 	private void initializeGame(){
-		
-
 		
 		while (!hangmanModel.openLexicon(
 					consoleView.getInputString("Enter Lexicon File Name", this))){
@@ -43,7 +40,6 @@ public class HangmanController extends ConsoleProgram{
 		canvas.buildUIComponenents(canvas);
 		canvas.reset();
 		canvas.displayUpdate(hangmanModel.getDisplayWord(), hangmanModel.getLettersEntered());
-		
 	}
 	
 	
@@ -58,23 +54,15 @@ public class HangmanController extends ConsoleProgram{
 					consoleView.getInputString("Enter a Character, hit return", this));
 				
 			if(inputChar != null){
-				consoleView.printMsg("valid entry from " + consoleView.getLastInput() + " " + inputChar, this);
 				return(inputChar);
 			}
 			consoleView.printMsg(("Invalid Entry " + consoleView.getLastInput()), this);
-		
 		}
 		// not needed as should never get here but eclipse complained
 		return (null);
 	}
 	
-	
-	private void playTurn(){	
-		if(!hangmanModel.processGuessEntry(getValidCharGuess())){
-			canvas.noteIncorrectGuess('a');
-		}
-			
-	}
+
 	
 	private void updateDisplayStatus(){
 		consoleView.printMsg("Guess Count " + hangmanModel.getGuessCount(),  this);
@@ -121,7 +109,9 @@ public class HangmanController extends ConsoleProgram{
 		while (!hangmanModel.getExitGameCondition()){
 			
 			while (hangmanModel.getContinueGame()){
-				playTurn();
+				if(!hangmanModel.processGuessEntry(getValidCharGuess())){
+					canvas.noteIncorrectGuess();
+				}
 				updateDisplayStatus();
 			}
 			

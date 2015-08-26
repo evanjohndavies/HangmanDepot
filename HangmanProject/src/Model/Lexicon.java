@@ -36,7 +36,6 @@ public class Lexicon {
 				line = line.trim();
 				line = line.toUpperCase();
 				lexiconList.add(line);
-				System.out.println(line);
 			}
 
 
@@ -59,9 +58,7 @@ public class Lexicon {
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-			
 		}
-		
 	}
 	
 	
@@ -74,15 +71,10 @@ public class Lexicon {
 		return(lexiconList.get(randomNumber));
 		
 	}
-	
 	   
 	   
 	private	Random randomObject = new Random();
 	private BufferedReader bufferReader = null;
 	private FileReader fileReader = null;
 	private ArrayList<String> lexiconList = new ArrayList<String>();
-	
-
-	
-	
 }

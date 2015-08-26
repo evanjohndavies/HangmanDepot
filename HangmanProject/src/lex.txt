@@ -1,7 +1,9 @@
-apple
-pear
-bannana
-string
-  tree
-bar-code
+apple cider
+pear juice
+banana split
+string theory
+  tree house
+bar code
   Stop&Go
+  pogo stick
+  real word

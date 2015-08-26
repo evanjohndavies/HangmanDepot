@@ -8,7 +8,7 @@ public class HangmanModel {
 	public HangmanModel(){
 		 
 	}
-	
+
 	
 	public boolean openLexicon(String fileName){
 		
@@ -21,7 +21,6 @@ public class HangmanModel {
 		}
 		
 		return(false);
-		
 	}
 	
 	public void resetGame(){
@@ -30,12 +29,11 @@ public class HangmanModel {
 		resetGuessCount();
 		setEndGame(false);
 		lettersEntered.removeAll(lettersEntered);
-		
 	}
+	
 	
 	public String getWordToGuess (){
 		return(this.wordToGuess.getSecretWord());
-		
 	}
 	
 	
@@ -53,7 +51,6 @@ public class HangmanModel {
 		}
 		
 		return(null);
-		
 	}
 	
 

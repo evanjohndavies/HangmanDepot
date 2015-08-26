@@ -34,20 +34,23 @@ import acm.graphics.*;
 		    * Updates the display to correspond to an incorrect guess by the
 		    * user. Calling this method causes the next body part to appear
 		    * on the scaffold and adds the letter to the list of incorrect
-		    * guesses that appears at the bottom of the window. */
-	public void noteIncorrectGuess(char letter) { 
+		    * guesses that appears at the bottom of the window.  */
+	public void noteIncorrectGuess() { 
 			   	  	  
 			  hangmanArray.get(hangmanArrayIndex++).setVisible(true);
 			
 			}
 
+			
+
 	/**
 		 * Updates the word on the screen to correspond to the current
 		 * state of the game. The argument string shows what letters have
 		 * been guessed so far; unguessed letters are indicated by hyphens. */
+	
 	public void displayUpdate(String word, ArrayList<Character> letters) {
-		   displayWord.setLabel(word);
-		   displayLetters.setLabel(letters.toString());
+		   displayWord.setLabel("Word: " + word);
+		   displayLetters.setLabel("Letters: " + letters.toString());
 		
 	   }
 	   
@@ -79,8 +82,8 @@ import acm.graphics.*;
 		base.setVisible(true);
 		displayWord.setVisible(true);
 		displayLetters.setVisible(true);	
-		// calculate layout of scaffold in GCompound
 		
+		// calculate layout of scaffold in GCompound
 		scaffold.add(beam,offset,0);
 		scaffold.add(pole,offset,0);
 		scaffold.add(rope,offset+BEAM_LENGTH,0);
@@ -91,33 +94,10 @@ import acm.graphics.*;
 		scaffoldHeight = SCAFFOLD_HEIGHT + BASE_HEIGHT;
 		scaffoldWidth = BASE_WIDTH;
 			
-		xOffset = (canvasWidth - scaffoldWidth)/2;
-		System.out.println("X = " + xOffset);
-		
-		yOffset = (canvasHeight - scaffoldHeight)/2;
-		System.out.println("Y = " + yOffset);
-
-		
+		xOffset = (canvasWidth - scaffoldWidth)/2;		
+		yOffset = (canvasHeight - scaffoldHeight)/2;	
 		this.add(scaffold,xOffset,yOffset);
 		
-		// Add Display Fields for Word and Letters Guessed
-		
-		System.out.println("X = " + xOffset);
-		System.out.println("SCAFFOLD_HEIGHT = " + SCAFFOLD_HEIGHT);
-		System.out.println("BASE_HEIGHT = " + BASE_HEIGHT);
-		System.out.println("BASE_WIDTH = " + BASE_WIDTH);
-		System.out.println("canvasWidth = " + canvasWidth);
-		System.out.println("canvasHeight = " + canvasHeight);
-		System.out.println("scaffold.getHeight() = " + scaffold.getHeight());
-		System.out.println("scaffold.getWidth() = " + scaffold.getWidth());
-		System.out.println("scaffold.getX = " + scaffold.getX());
-		System.out.println("scaffold.getY = " + scaffold.getY());
-		System.out.println("scaffoldWidth = " + scaffoldWidth);
-		System.out.println("scaffoldHeight = " + scaffoldHeight);
-		System.out.println("displayLetters.getHeight() = " + displayLetters.getHeight());
-		System.out.println("displayLetters.getWidth() = " + displayLetters.getWidth());
-		
-	
 		
 		// build and add hangman components 
 		buildMan();
@@ -127,33 +107,17 @@ import acm.graphics.*;
 		*/
 		xOffset += (BASE_WIDTH/3+ (BEAM_LENGTH - UPPER_ARM_LENGTH));
 		yOffset = ((canvasHeight/2) - (scaffoldHeight/2) + ROPE_LENGTH);
-		
 		canvas.add(hangmanDisplay,xOffset,yOffset);
 		
-		
+		// add display labe for word to be guessed 
 		displayWord.setFont(new Font("Courier New", Font.BOLD, 18));
 		xOffset = scaffold.getX() + CHAR_INDENT;
 		yOffset = scaffold.getY() + SCAFFOLD_HEIGHT + (BASE_HEIGHT/2) + displayWord.getHeight()/2;
-		
-		System.out.println("Y = " + yOffset);
-		
 		canvas.add(displayWord, xOffset, yOffset);
 		
+		displayLetters.setFont(new Font("Courier New", Font.BOLD, 16));
 		yOffset += BASE_HEIGHT;
 		canvas.add(displayLetters, xOffset, yOffset);	
-		
-		
-
-		
-		
-		
-
-
-		
-		
-		
-		
-		
 	}
 	
 	
@@ -175,7 +139,6 @@ import acm.graphics.*;
 		rightLeg.add(new GLine(0,0,(.5 * HIP_WIDTH),0));
 		rightLeg.add(new GLine((.5 * HIP_WIDTH),0,(.5 * HIP_WIDTH),LEG_LENGTH));
 	}
-	
 	
 	
 	private void buildMan(){
@@ -237,43 +200,39 @@ import acm.graphics.*;
 	}
 	
 	
-	
-	
 	// Constants for the simple version of the picture (in pixels)
-private static final int SCAFFOLD_HEIGHT = 360; 
-private static final int BASE_WIDTH = 250;
-private static final int BASE_HEIGHT = 45;
-private static final int BEAM_LENGTH = 144; 
-private static final int ROPE_LENGTH = 18; 
-private static final int HEAD_RADIUS = 36; 
-private static final int BODY_LENGTH = 144; 
-private static final int ARM_OFFSET_FROM_HEAD = 28;
-private static final int UPPER_ARM_LENGTH = 72; 
-private static final int LOWER_ARM_LENGTH = 44; 
-private static final int HIP_WIDTH = 36; 
-private static final int LEG_LENGTH = 108; 
-private static final int FOOT_LENGTH = 28;
-private static final int CHAR_INDENT = 20;
+	private static final int SCAFFOLD_HEIGHT = 360; 
+	private static final int BASE_WIDTH = 250;
+	private static final int BASE_HEIGHT = 45;
+	private static final int BEAM_LENGTH = 144; 
+	private static final int ROPE_LENGTH = 18; 
+	private static final int HEAD_RADIUS = 36; 
+	private static final int BODY_LENGTH = 144; 
+	private static final int ARM_OFFSET_FROM_HEAD = 28;
+	private static final int UPPER_ARM_LENGTH = 72; 
+	private static final int LOWER_ARM_LENGTH = 44; 
+	private static final int HIP_WIDTH = 36; 
+	private static final int LEG_LENGTH = 108; 
+	private static final int FOOT_LENGTH = 28;
+	private static final int CHAR_INDENT = 20;
 
-private ArrayList<GObject> hangmanArray = new ArrayList<GObject>();
-private int hangmanArrayIndex = 0;
-private GCompound hangmanDisplay = new GCompound();
+	private ArrayList<GObject> hangmanArray = new ArrayList<GObject>();
+	private int hangmanArrayIndex = 0;
+	private GCompound hangmanDisplay = new GCompound();
 
-private GCompound scaffold = new GCompound();
-private GLine pole = new GLine(0, 0, 0, SCAFFOLD_HEIGHT);
-private GLine beam = new GLine(0,0,BEAM_LENGTH, 0);
-private GLine rope = new GLine(0,0,0,ROPE_LENGTH);
-private GRect base = new GRect(BASE_WIDTH, BASE_HEIGHT);
-private GOval head = new GOval((2*HEAD_RADIUS), (2*HEAD_RADIUS));
-private GLine body = new GLine(0,0,0,BODY_LENGTH);
-private GCompound leftArm = new GCompound();
-private GCompound rightArm = new GCompound();
-private GCompound leftLeg = new GCompound();
-private GLine leftFoot = new GLine(0,0,FOOT_LENGTH,0);
-private GCompound rightLeg = new GCompound();
-private GLine rightFoot = new GLine(0,0,FOOT_LENGTH,0);
-private GLabel displayWord = new GLabel("Bite me");
-private GLabel  displayLetters = new GLabel("Bite me too");
-
-
+	private GCompound scaffold = new GCompound();
+	private GLine pole = new GLine(0, 0, 0, SCAFFOLD_HEIGHT);
+	private GLine beam = new GLine(0,0,BEAM_LENGTH, 0);
+	private GLine rope = new GLine(0,0,0,ROPE_LENGTH);
+	private GRect base = new GRect(BASE_WIDTH, BASE_HEIGHT);
+	private GOval head = new GOval((2*HEAD_RADIUS), (2*HEAD_RADIUS));
+	private GLine body = new GLine(0,0,0,BODY_LENGTH);
+	private GCompound leftArm = new GCompound();
+	private GCompound rightArm = new GCompound();
+	private GCompound leftLeg = new GCompound();
+	private GLine leftFoot = new GLine(0,0,FOOT_LENGTH,0);
+	private GCompound rightLeg = new GCompound();
+	private GLine rightFoot = new GLine(0,0,FOOT_LENGTH,0);
+	private GLabel displayWord = new GLabel("Bite me");
+	private GLabel  displayLetters = new GLabel("Bite me too");
 }

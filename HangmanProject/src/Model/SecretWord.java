@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.*;
 
 public class SecretWord {
 	
@@ -15,7 +14,7 @@ public class SecretWord {
 		if (this.validWord(this.secretWord)){
 			if (this.validWord(inputWord)){
 				secretWord = inputWord;
-				displayWord = inputWord.replaceAll("[A-Z]", "_");
+				displayWord = inputWord.replaceAll("[A-Z]", "-");
 				return (true);
 				}
 			}
@@ -86,6 +85,5 @@ public class SecretWord {
 	
 	private String secretWord;
 	private String displayWord;
-	
 	
 }
