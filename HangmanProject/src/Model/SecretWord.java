@@ -1,7 +1,7 @@
 package Model;
 
 
-public class SecretWord {
+public class SecretWord extends Lexicon{
 	
 	public SecretWord(){
 		secretWord = null;
@@ -10,14 +10,15 @@ public class SecretWord {
 	
 	public boolean setSecretWord(String inputWord){
 		
-		secretWord = this.cleanInput(inputWord);
-		if (this.validWord(this.secretWord)){
-			if (this.validWord(inputWord)){
-				secretWord = inputWord;
-				displayWord = inputWord.replaceAll("[A-Z]", "-");
-				return (true);
-				}
+		inputWord = cleanInput(inputWord);
+
+		if (validWord(inputWord)){
+			secretWord = inputWord;
+			displayWord = inputWord.replaceAll("[A-Z]", "-");
+			return (true);
 			}
+			secretWord = null;
+			displayWord = null;
 			return(false);
 		}
 		
@@ -25,10 +26,25 @@ public class SecretWord {
 		return(secretWord);
 	}
 	
-	public boolean validWord(String inputWord){
+	public static boolean validWord(String inputWord){
+		
+		char[]  testCharArray;
+		Character ch;
+		String testString;
+		
+		
+		testString = cleanInput(inputWord);
 		
 		// validate that the string entered is not null and is greater than 0 characters long 
 		if (inputWord != null && inputWord.length() > 0){
+
+			testCharArray = testString.toCharArray();
+			for (char c: testCharArray){
+				ch = (Character) c;
+				if (!Character.isLetter(ch)){
+					return(false);
+				}
+			}
 			return (true);
 		}
 		
@@ -75,7 +91,7 @@ public class SecretWord {
 	}
 	
 	
-	private String cleanInput (String inputString){
+	private static String cleanInput (String inputString){
 		
 		inputString = inputString.trim();
 		inputString = inputString.toUpperCase();

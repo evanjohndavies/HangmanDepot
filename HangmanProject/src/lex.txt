@@ -1,9 +1,20 @@
-apple cider
-pear juice
-banana split
-string theory
+apple 
+cider
+pear 
+juice
+banana 
+split
+string 
+theory
   tree house
 bar code
   Stop&Go
-  pogo stick
-  real word
+  stick
+  real 
+  word
+  Mississippi
+  palindrome
+  civic
+  level
+  kayak
+  
