@@ -39,9 +39,11 @@ public class SecretWord extends Lexicon{
 		if (inputWord != null && inputWord.length() > 0){
 
 			testCharArray = testString.toCharArray();
+			System.out.println("Word = " + inputWord);
 			for (char c: testCharArray){
 				ch = (Character) c;
 				if (!Character.isLetter(ch)){
+					System.out.println("Invalid Word" + inputWord);
 					return(false);
 				}
 			}
